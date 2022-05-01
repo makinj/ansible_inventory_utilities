@@ -7,9 +7,9 @@ DOCUMENTATION = '''
     plugin_type: inventory
     author:
       - Joshua Makinen (@joshuamakinen)
-    short_description: TKTK.
+    short_description: Inverts the normal Ansible inventory group relationship to list the parents of a host/group instead of listing the group's children.
     description:
-        - TKTK
+        - "n/a"
     version_added: "n/a"
     inventory: inverted-group
     options:
@@ -19,11 +19,11 @@ DOCUMENTATION = '''
             choices: ['inverted-group']
         hosts:
             description:
-                - TKTK
+                - Same as normal Ansible inventories, but now you can specify parents of hosts as well
             required: False
         groups:
             description:
-                - TKTK
+                - Same as normal Ansible inventories, but now you can specify parents of groups as well
             required: False
     requirements:
         - python >= 2.7
