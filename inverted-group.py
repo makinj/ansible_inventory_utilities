@@ -33,14 +33,14 @@ EXAMPLES = r'''
 ---
 plugin: inverted-group
 hosts:
-    example-host:
-        parents:
-            dev_tmux_installed
+  example-host:
+    parents:
+    - devops_tools_installed
 groups:
-    dev_tmux_installed:
-        parents:
-            dev
-            tmux_installed
+  devops_tools_installed:
+    parents:
+    - dev_tools_installed
+    - ops_tools_installed
 '''
 
 from ansible.errors import AnsibleError, AnsibleParserError
