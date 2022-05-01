@@ -34,11 +34,13 @@ Example:
 ```yaml
 plugin: combined-groups
 dimensions:
-- myPC:
 - dev:
   prod:
 - hypervisor:
   guest:
+    children:
+      headless_guest:
+      gui_guest:
 ```
 
 Having the above in a file ending in `cgroups.yml`, `cgroups.yaml`,`combined-groups.yml`, or `combined-groups.yaml` in your inventory
@@ -48,61 +50,34 @@ Results in:
 @all:
   |--@dev:
   |  |--@dev_guest:
-  |  |  |--@myPC_dev_guest:
+  |  |  |--@dev_gui_guest:
+  |  |  |--@dev_headless_guest:
+  |  |--@dev_gui_guest:
+  |  |--@dev_headless_guest:
   |  |--@dev_hypervisor:
-  |  |  |--@myPC_dev_hypervisor:
-  |  |--@myPC_dev:
-  |  |  |--@myPC_dev_guest:
-  |  |  |--@myPC_dev_hypervisor:
-  |  |--@myPC_dev_guest:
-  |  |--@myPC_dev_hypervisor:
   |--@guest:
   |  |--@dev_guest:
-  |  |  |--@myPC_dev_guest:
-  |  |--@myPC_dev_guest:
-  |  |--@myPC_guest:
-  |  |  |--@myPC_dev_guest:
-  |  |  |--@myPC_prod_guest:
-  |  |--@myPC_prod_guest:
+  |  |  |--@dev_gui_guest:
+  |  |  |--@dev_headless_guest:
+  |  |--@gui_guest:
+  |  |  |--@dev_gui_guest:
+  |  |  |--@prod_gui_guest:
+  |  |--@headless_guest:
+  |  |  |--@dev_headless_guest:
+  |  |  |--@prod_headless_guest:
   |  |--@prod_guest:
-  |  |  |--@myPC_prod_guest:
+  |  |  |--@prod_gui_guest:
+  |  |  |--@prod_headless_guest:
   |--@hypervisor:
   |  |--@dev_hypervisor:
-  |  |  |--@myPC_dev_hypervisor:
-  |  |--@myPC_dev_hypervisor:
-  |  |--@myPC_hypervisor:
-  |  |  |--@myPC_dev_hypervisor:
-  |  |  |--@myPC_prod_hypervisor:
-  |  |--@myPC_prod_hypervisor:
   |  |--@prod_hypervisor:
-  |  |  |--@myPC_prod_hypervisor:
-  |--@myPC:
-  |  |--@myPC_dev:
-  |  |  |--@myPC_dev_guest:
-  |  |  |--@myPC_dev_hypervisor:
-  |  |--@myPC_dev_guest:
-  |  |--@myPC_dev_hypervisor:
-  |  |--@myPC_guest:
-  |  |  |--@myPC_dev_guest:
-  |  |  |--@myPC_prod_guest:
-  |  |--@myPC_hypervisor:
-  |  |  |--@myPC_dev_hypervisor:
-  |  |  |--@myPC_prod_hypervisor:
-  |  |--@myPC_prod:
-  |  |  |--@myPC_prod_guest:
-  |  |  |--@myPC_prod_hypervisor:
-  |  |--@myPC_prod_guest:
-  |  |--@myPC_prod_hypervisor:
   |--@prod:
-  |  |--@myPC_prod:
-  |  |  |--@myPC_prod_guest:
-  |  |  |--@myPC_prod_hypervisor:
-  |  |--@myPC_prod_guest:
-  |  |--@myPC_prod_hypervisor:
   |  |--@prod_guest:
-  |  |  |--@myPC_prod_guest:
+  |  |  |--@prod_gui_guest:
+  |  |  |--@prod_headless_guest:
+  |  |--@prod_gui_guest:
+  |  |--@prod_headless_guest:
   |  |--@prod_hypervisor:
-  |  |  |--@myPC_prod_hypervisor:
   |--@ungrouped:
 ```
 
