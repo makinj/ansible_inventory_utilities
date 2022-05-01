@@ -1,15 +1,13 @@
 #!/bin/env python
-
-
   
 DOCUMENTATION = '''
     name: combined-groups Inventory
     plugin_type: inventory
     author:
       - Joshua Makinen (@joshuamakinen)
-    short_description: TKTK
+    short_description: Takes a list of dimensions of group name segments and generates groups by combining them. Group name segments with children and parent relationships will have those factored into the combinations.
     description:
-        - TKTK
+        - "n/a"
     version_added: "n/a"
     inventory: combined-groups
     options:
@@ -19,7 +17,7 @@ DOCUMENTATION = '''
             choices: ['combined-groups']
         dimensions:
             description:
-                - TKTK
+                - list of group name segments to be combined into new groups.
             required: True
     requirements:
         - python >= 2.7
@@ -29,9 +27,13 @@ EXAMPLES = r'''
 ---
 plugin: combined-groups
 dimensions:
-- [dev,prod]
-- [PCLT02,Ulfgar]
-- [vagrant_hypervisors, vagrant_guests, vagrant_virtualbox_guests]
+- dev:
+  prod:
+- hypervisor:
+  guest:
+    children:
+      headless_guest:
+      gui_guest:
 '''
 
 from ansible.errors import AnsibleError, AnsibleParserError
@@ -86,16 +88,13 @@ class InventoryModule(BaseFileInventoryPlugin):
             callback(elements, {})
 
     def add_combination_groups(self, combo, prefix=[]):
-        #print(repr(combo),prefix)
         if len(combo)>=1:
             cur_elem=combo[0]
             def add_element_groups(name,data,parent='',child=''):
-                #print(parent,name,repr(data))
                 full_group=prefix+[name]
                 if len(combo)>1:
                     self.add_combination_groups(combo[1:],full_group)
                 else:
-                    #print(repr(prefix),repr(name),repr(full_group))
                     full_group_name='_'.join(full_group)
                     self.inventory.add_group(full_group_name)
                     if parent:
