@@ -10,19 +10,25 @@ Example:
 ```yaml
 plugin: inverted-group
 hosts:
-  myPC:
+  example-host:
     parents:
-      - install_dev_tools
-      - install_ops_tools
+    - devops_tools_installed
+groups:
+  devops_tools_installed:
+    parents:
+    - dev_tools_installed
+    - ops_tools_installed
 ```
 Having the above in a file ending in `igroups.yml`, `igroups.yaml`,`inverted-groups.yml`, or `inverted-groups.yaml` in your inventory
 Results in:
 ```
 @all:
-  |--@install_dev_tools:
-  |  |--myPC
-  |--@install_ops_tools:
-  |  |--myPC
+  |--@dev_tools_installed:
+  |  |--@devops_tools_installed:
+  |  |  |--example-host
+  |--@ops_tools_installed:
+  |  |--@devops_tools_installed:
+  |  |  |--example-host
   |--@ungrouped:
 ```
 
