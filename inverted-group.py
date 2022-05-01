@@ -19,11 +19,11 @@ DOCUMENTATION = '''
             choices: ['inverted-group']
         hosts:
             description:
-                - Same as normal Ansible inventories, but now you can specify parents of hosts as well
+                - List of hosts, which include a list of their parent groups.
             required: False
         groups:
             description:
-                - Same as normal Ansible inventories, but now you can specify parents of groups as well
+                - List of groups, which include a list of their parent groups.
             required: False
     requirements:
         - python >= 2.7
