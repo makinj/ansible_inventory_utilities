@@ -15,7 +15,7 @@ hosts:
       - install_dev_tools
       - install_ops_tools
 ```
-
+Having the above in a file ending in `igroups.yml`, `igroups.yaml`,`inverted-groups.yml`, or `inverted-groups.yaml` in your inventory
 Results in:
 ```
 @all:
@@ -31,7 +31,6 @@ Results in:
 Takes a number of dimensions of groups and combines their names while retaining the inner structure so you can have the same pattern of groupings replicated and target specific group combinations. input groups can have children and parents (from inverted groups) and 
 
 Example:
-
 ```yaml
 plugin: combined-groups
 dimensions:
@@ -41,6 +40,8 @@ dimensions:
 - hypervisor:
   guest:
 ```
+
+Having the above in a file ending in `cgroups.yml`, `cgroups.yaml`,`combined-groups.yml`, or `combined-groups.yaml` in your inventory
 Results in:
 
 ```
