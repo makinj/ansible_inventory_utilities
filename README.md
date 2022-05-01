@@ -7,7 +7,7 @@ Inverts the normal group relationship where you can list the parents of a host/g
 
 Example:
 
-```
+```yaml
 plugin: inverted-group
 hosts:
   myPC:
