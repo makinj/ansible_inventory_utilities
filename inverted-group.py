@@ -57,7 +57,6 @@ class InventoryModule(BaseFileInventoryPlugin):
     def parse(self, inventory, loader, path, cache=True):
         super(InventoryModule, self).parse(inventory, loader, path)
         self._read_config_data(path)
-
         hosts_in = self.get_option('hosts')
         if hosts_in:
             for host, hostdata in hosts_in.items():
